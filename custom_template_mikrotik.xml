@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export xmlns="http://www.zabbix.com">
+  <version>6.0</version>
+  <templates>
+    <template>
+      <template>Custom MikroTik Template</template>
+      <name>Custom MikroTik Template</name>
+      <description>Monitoring template for MikroTik network devices</description>
+      <groups>
+        <group><name>Templates/Custom</name></group>
+      </groups>
+    </template>
+  </templates>
+  <triggers>
+    <!-- Interface down -->
+    <trigger>
+      <expression>{Custom MikroTik Template:net.if.status.eth0.nodata(30)}=1</expression>
+      <name>Interface eth0 down for over 30 seconds / Интерфейс eth0 недоступен более 30 секунд</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <!-- Packet loss -->
+    <trigger>
+      <expression>{Custom MikroTik Template:net.if.errors.eth0.last()}>5</expression>
+      <name>Packet loss on eth0 &gt;5% / Потери пакетов на eth0 &gt;5%</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <!-- CPU load -->
+    <trigger>
+      <expression>{Custom MikroTik Template:system.cpu.util.last()}&gt;85</expression>
+      <name>CPU load &gt;85% / Высокая загрузка CPU</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <!-- Temperature -->
+    <trigger>
+      <expression>{Custom MikroTik Template:hardware.temperature.last()}&gt;65</expression>
+      <name>Temperature &gt;65°C / Температура выше 65°C</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <!-- VPN tunnel status -->
+    <trigger>
+      <expression>{Custom MikroTik Template:vpn.pptp.status.last()}=0</expression>
+      <name>PPTP VPN tunnel down / PPTP VPN туннель отключён</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom MikroTik Template:vpn.l2tp.status.last()}=0</expression>
+      <name>L2TP VPN tunnel down / L2TP VPN туннель отключён</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom MikroTik Template:vpn.openvpn.status.last()}=0</expression>
+      <name>OpenVPN tunnel down / OpenVPN туннель отключён</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <!-- Disk space -->
+    <trigger>
+      <expression>{Custom MikroTik Template:vfs.fs.size[/,pfree].last()}&lt;15</expression>
+      <name>Free disk space &lt;15% / Мало места на диске</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <!-- Ping loss -->
+    <trigger>
+      <expression>{Custom MikroTik Template:icmpping[8.8.8.8].max(180)}=0</expression>
+      <name>External ping lost / Потеря пинга к внешнему IP</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <!-- Device unreachable -->
+    <trigger>
+      <expression>{Custom MikroTik Template:agent.ping.nodata(180)}=1</expression>
+      <name>Device unreachable (agent not responding) / Устройство недоступно (агент не отвечает)</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+  </triggers>
+</zabbix_export>

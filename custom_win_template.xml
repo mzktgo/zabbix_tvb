@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export xmlns="http://www.zabbix.com">
+  <version>6.0</version>
+  <templates>
+    <template>
+      <template>Custom Windows Template</template>
+      <name>Custom Windows Template</name>
+      <description>Template Win</description>
+      <groups><group><name>Templates/Custom</name></group></groups>
+    </template>
+  </templates>
+  <triggers>
+    <trigger>
+      <expression>{Custom Windows Template:icmpping.max(180)}=0</expression>
+      <name>Host unavailable (ping failed 3 times in 3 min) / Недоступность узла</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:agent.ping.nodata(180)}=1</expression>
+      <name>Zabbix agent not responding &gt;3 min / Агент Zabbix не отвечает</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>(({Custom Windows Template:wmi.get[root\WMI,"SELECT CurrentTemperature FROM MSAcpi_ThermalZoneTemperature"].last()}-2732)/10)&gt;75</expression>
+      <name>CPU temperature &gt;75°C / Температура CPU превышена</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:system.cpu.util.min(10m)}&gt;90</expression>
+      <name>CPU load &gt;90% for 10 min / Высокая загрузка CPU</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:vm.memory.util.last()}&gt;90</expression>
+      <name>Memory usage &gt;90% / Переполнение оперативной памяти</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[rphost.exe].min(1h)}&gt;20</expression>
+      <name>rphost &gt;20 processes for 1h / Кол-во процессов rphost превышено</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:system.cpu.load[,avg1].last()}&gt;2</expression>
+      <name>CPU load average &gt; 2 cores / Превышение средней загрузки</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:vfs.fs.size[C:,pfree].last()}&lt;15</expression>
+      <name>Free disk space &lt;15% / Мало свободного места на системном диске</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:pgsql.conn.percent.last()}&gt;90</expression>
+      <name>PostgreSQL connections &gt;90% / Подключений к PostgreSQL &gt;90%</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:pgsql.replication.lag.last()}&gt;5</expression>
+      <name>PostgreSQL replication lag &gt;5s / Лаг репликации PostgreSQL</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:mysql.conn.percent.last()}&gt;90</expression>
+      <name>MySQL connections &gt;90% / Подключений к MySQL &gt;90%</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:mysql.slowqueries.count(600)}&gt;10</expression>
+      <name>MySQL slow queries &gt;10 in 10 min / Медленных запросов MySQL &gt;10 за 10 мин</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:system.cpu.iowait.last()}&gt;20</expression>
+      <name>I/O wait &gt;20% / Высокий I/O</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[postgres.exe].last()}&lt;1</expression>
+      <name>PostgreSQL is not running / PostgreSQL не работает</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[mysqld.exe].last()}&lt;1</expression>
+      <name>MySQL is not running / MySQL не работает</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[sqlservr.exe].last()}&lt;1</expression>
+      <name>MS SQL Server is not running / MS SQL Server не работает</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[httpd.exe].last()}&lt;1</expression>
+      <name>Apache is not running / Apache не работает</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[w3wp.exe].last()}&lt;1</expression>
+      <name>IIS is not running / IIS не работает</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[ragent.exe].last()}&lt;1</expression>
+      <name>1C server process is not running / Сервер 1С не запущен</name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:proc.num[1cv8.exe].last()}&lt;1</expression>
+      <name>1C client is not running / Клиент 1С не запущен</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:eventlog[Security,,4625,,].count(300)}&gt;5</expression>
+      <name>Failed logins (5+ in 5 min) / Частые неудачные попытки входа</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+	<trigger>
+      <expression>{Custom Windows Template:eventlog[System,,41,,].count(300)}>0</expression>
+      <name>Unexpected system shutdown / Неожиданное выключение </name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:eventlog[System,,55,,].count(300)}>0</expression>
+      <name>NTFS file system error / Ошибка файловой системы </name>
+      <priority>4</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:icmpping[8.8.8.8].max(180)}=0</expression>
+      <name>External internet unreachable / Потеря внешнего интернета</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>({Custom Windows Template:vfs.file.time[C:\Backups\my_backup.bak].now()} - {Custom Windows Template:vfs.file.time[C:\Backups\my_backup.bak].last()})&gt;86400</expression>
+      <name>No backup in last 24h / Нет бэкапа за 24 часа</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+    <trigger>
+      <expression>{Custom Windows Template:vfs.file.size[C:\Backups\my_backup.bak].last()}&lt;10485760</expression>
+      <name>Backup size too small (&lt;10MB) / Размер бэкапа слишком мал</name>
+      <priority>3</priority>
+      <status>0</status>
+    </trigger>
+  </triggers>
+</zabbix_export>
