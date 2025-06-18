@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export xmlns="http://www.zabbix.com">
-  <version>6.0</version>
+  <version>5.0</version>
   <templates>
     <template>
       <template>Custom Linux Template</template>
