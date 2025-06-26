@@ -12,6 +12,12 @@
           <name>Templates/Custom</name>
         </group>
       </groups>
+      <items/>
+      <discovery_rules/>
+      <httptests/>
+      <macros/>
+      <templates/>
+      <screens/>
     </template>
   </templates>
   <triggers>
