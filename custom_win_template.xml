@@ -17,7 +17,6 @@
       <httptests/>
       <macros/>
       <templates/>
-      <screens/>
     </template>
   </templates>
   <triggers>
@@ -147,14 +146,14 @@
       <priority>3</priority>
       <status>0</status>
     </trigger>
-	<trigger>
-      <expression>{Custom Windows Template:eventlog[System,,41,,].count(300)}>0</expression>
+    <trigger>
+      <expression>{Custom Windows Template:eventlog[System,,41,,].count(300)}&gt;0</expression>
       <name>Unexpected system shutdown / Неожиданное выключение </name>
       <priority>4</priority>
       <status>0</status>
     </trigger>
     <trigger>
-      <expression>{Custom Windows Template:eventlog[System,,55,,].count(300)}>0</expression>
+      <expression>{Custom Windows Template:eventlog[System,,55,,].count(300)}&gt;0</expression>
       <name>NTFS file system error / Ошибка файловой системы </name>
       <priority>4</priority>
       <status>0</status>
