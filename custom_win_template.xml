@@ -5,6 +5,7 @@
     <template>
       <template>Custom Windows Template</template>
       <name>Custom Windows Template</name>
+      <uuid>5b7e09e2-3ed9-4c2c-8e9d-d6bb6b66b27a</uuid>
       <description>Template Win</description>
       <groups><group><name>Templates/Custom</name></group></groups>
     </template>
